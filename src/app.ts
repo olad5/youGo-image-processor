@@ -4,6 +4,7 @@ import cors from 'cors'
 import dotenv from 'dotenv'
 import logger from 'morgan'
 import process from "process";
+import uploadRouter from './routes/uploadRoutes'
 
 const app = express()
 
@@ -14,6 +15,7 @@ app.use(cors());// Implement CORS
 
 dotenv.config()
 
+app.use('/api/v1/images', uploadRouter);
 
 process.on('uncaughtException', err => {// uncaught exceptions are meant to stop the server
   console.log('UNCAUGHT EXCEPTION! 💥 Shutting down...');
@@ -42,3 +44,4 @@ process.on('SIGTERM', () => {
     console.log('💥 Process terminated!');
   });
 });
+
